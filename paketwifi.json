@@ -1,0 +1,19 @@
+[
+
+   {  "Paket": "12H", 
+      "Aktif": "12Jam", 
+      "Harga": "Rp 2.000" 
+   },
+   {  "Paket": "24H", 
+      "Aktif": "24Jam", 
+      "Harga": "Rp 3.000" 
+   },
+   {  "Paket": "2d", 
+      "Aktif": "2 Hari", 
+      "Harga": "Rp 5.000" 
+   },
+   {  "Paket": "7d", 
+      "Aktif": "7 Hari", 
+      "Harga": "Rp 15.000" 
+   }
+ ]

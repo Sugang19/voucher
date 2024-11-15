@@ -1,0 +1,104 @@
+# File ini berisi pesan kesalahan yang ditampilkan kepada pengguna, ketika http/https
+# login digunakan.
+# Pesan-pesan ini dapat diubah untuk membuat antarmuka pengguna lebih ramah, termasuk
+# translations to different languages.
+# Berbagai variabel juga dapat digunakan di sini. Yang paling sering digunakan adalah:
+#	$(error-orig)	- pesan kesalahan asli dari hotspot
+#	$(ip)			- alamat ip klien
+#	$(username)		- nama pengguna klien yang mencoba masuk
+
+
+# kesalahan internal
+# Ini seharusnya tidak pernah terjadi. Jika ya, halaman kesalahan akan ditampilkan
+# menampilkan pesan error ini (error-orig akan menjelaskan apa yang terjadi)
+
+internal-error = kesalahan internal ($(error-orig))
+
+# kesalahan konfigurasi
+# Seharusnya tidak terjadi jika hotspot dikonfigurasi dengan benar.
+
+config-error = kesalahan konfigurasi ($(error-orig))
+
+# belum masuk
+# Akan terjadi, jika status atau halaman logout diminta oleh pengguna,
+# yang sebenarnya belum login
+
+not-logged-in = kamu belum masuk (ip $(ip))
+
+# ippool-kosong
+# Alamat IP untuk pengguna akan diberikan dari kumpulan ip, namun tidak ada lagi
+# alamat di kumpulan itu
+
+ippool-empty = Tidak ada IP kosong dari Pool
+
+# mematikan
+# Saat shutdown dijalankan, klien baru tidak diterima
+
+shutting-down = layanan hotspot dimatikan
+
+# batas sesi pengguna
+# Jika profil pengguna memiliki batas pengguna bersama, maka kesalahan ini akan ditampilkan
+# setelah mencapai batas ini
+
+user-session-limit = Sesi telah habis $(username)
+
+# batas-sesi lisensi
+# Tergantung pada lisensi, jumlah klien hotspot aktif dibatasi
+# jumlah tertentu. Jika batas ini tercapai, kesalahan berikut akan ditampilkan.
+
+license-session-limit = batas sesi tercapai ($(error-orig))
+
+# nama pengguna-mac salah
+# Jika nama pengguna terlihat seperti alamat MAC (12:34:56:78:9a:bc), namun sebenarnya bukan
+# alamat MAC klien ini, login ditolak
+
+wrong-mac-username = Nama pengguna tidak valid ($(username)): alamat MAC ini bukan milik Anda
+
+# bab hilang
+# Jika metode login http-chap digunakan, tetapi program hotspot tidak menerima
+# kembali kata sandi terenkripsi, pesan kesalahan ini ditampilkan.
+# Kemungkinan alasan kegagalan:
+# - JavaScript tidak diaktifkan di browser web;
+# - halaman login.html tidak valid;
+# - nilai tantangan telah kedaluwarsa di server (lebih dari 1 jam tidak aktif);
+# - Metode login http-chap baru-baru ini dihapus;
+# Jika JavaScript diaktifkan dan halaman login.html valid,
+# lalu mencoba login lagi biasanya memperbaiki masalah ini.
+
+chap-missing = web browser did not send challenge response Solusi:(Ip=>Hotspot=>Server Profile=>Ceklis HTTP PAP $ HTTP CHAP)
+
+# Nama pengguna tidak valid
+# Kasus paling umum dari nama pengguna atau kata sandi tidak valid. Jika server RADIUS
+# telah mengirimkan string kesalahan dengan pesan Access-Reject, maka itu akan terjadi
+# ganti pengaturan ini.
+
+invalid-username = username atau password salah
+
+# tidak valid-mac
+# Pengguna lokal (di server hotspot) dapat terikat ke beberapa alamat MAC. Jika masuk
+# dari MAC yang berbeda dicoba, pesan kesalahan ini akan ditampilkan.
+
+invalid-mac = user $(username) tidak diperbolehkan masuk dari alamat MAC ini
+
+# batas waktu aktif, batas lalu lintas
+# Untuk pengguna hotspot lokal jika batas tercapai
+
+uptime-limit = user $(username) Telah mencapai batas waktu aktif
+traffic-limit = user $(username) telah mencapai batas traffic
+
+# batas waktu radius
+# Pengguna diautentikasi oleh server RADIUS, tetapi tidak ada respons yang diterima darinya,
+# kesalahan berikut akan ditampilkan.
+
+radius-timeout = RADIUS server tidak merespon
+
+# autentikasi sedang berlangsung
+# Otorisasi sedang berlangsung. Klien sudah mengeluarkan permintaan otorisasi
+# yang belum lengkap.
+
+auth-in-progress = Sudah memberi otorisasi, coba lagi nanti
+
+# radius-balasan
+# Server Radius mengembalikan beberapa pesan kesalahan khusus
+
+radius-reply = $(error-orig)

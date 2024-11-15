@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emsya</title>
+    <link rel="stylesheet" href="nav.css">
+    <script src="sweetalert.min.js"></script>
+</head>
+<body>
+
+    <div class="wrapper">
+        $(if chap-id)
+        <form name="sendin" action="$(link-login-only)" method="post" style="display:none">
+            <input type="hidden" name="username" />
+            <input type="hidden" name="password" />
+            <input type="hidden" name="dst" value="$(link-orig)" />
+            <input type="hidden" name="popup" value="true" />
+        </form>
+    
+        <script src="/md5.js"></script>
+        <script>
+            function doLogin() {
+                document.sendin.username.value = document.login.username.value;
+                document.sendin.password.value = hexMD5('$(chap-id)' + document.login.password.value + '$(chap-challenge)');
+                document.sendin.submit();
+                return false;
+            }
+    
+        </script>
+        $(endif)
+        <input type="checkbox" id="submit1">
+
+        <script>
+            $(if error)
+
+            function swaal(){
+                swal({
+                title: "Warnig",
+                text: "$(error)",
+                icon: "warning",
+                // buttons: true,
+                dangerMode: true,
+                })
+            }
+            swaal();
+
+            $(endif)
+        </script>
+        <div class="flipper">
+            <div class="front">
+                <div class="container">
+                    <input type="radio" id="tab1" name="tabs" checked>
+                    <input type="radio" id="tab2" name="tabs">
+                    <input type="radio" id="tab3" name="tabs">
+                    <input type="radio" id="tab4" name="tabs">
+                    <div class="tab">
+                        <label class="t1" for="tab1"><img src="img/voucher.svg">Voucher</label>
+                        <label class="t2" for="tab2"><img src="img/member.svg">Member</label>
+                        <label class="t3" for="tab3"><img src="img/list.svg">Paket</label>
+                        <label class="t4" for="tab4"><img src="img/voucher.svg">Kontak</label>
+                    </div>
+                    <div class="content" id="contentOne">
+                        <h4>Masukan Kode Voucher</h4>
+                        <form name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
+                            <input type="hidden" name="dst" value="$(link-orig)" />
+                            <input type="hidden" name="popup" value="true" />
+             
+                            <div class="field">
+                                <!-- <label for="username">Voucher</label> -->
+                                <input id="username" type="text" name="username" onchange="udvalue(this.value)" value="$(username)" placeholder="Kode Voucher" autocomplete="off" required>
+                            </div>
+                            <input name="password" type="hidden" id="pass">
+                            <button type="submit"><img src="img/login.svg">Masuk</button>
+                            
+                            <!-- <input type="submit" value="Connect" /> -->
+                        </form>
+                            <div class="btnLogin">
+                                <button><a href="intent://emsya.github.io/qrcode#Intent;scheme=http;action=android.intent.action.VIEW;end"><img src="img/qr.svg"></a></button>
+                            <!-- $(if error == "")$(if trial == 'yes') -->
+                            <button style="width: 100%;"><img src="img/freeunlock.svg"><a href="$(link-login-only)?dst=$(link-orig-esc)&amp;username=T-$(mac-esc)">Gratis Tersedia</a></button>
+                            <!-- $(else) 
+                                <button type="submit"><img src="img/freelock.svg"><a href="#">Gratis Habis</a></button>
+                                $(endif)$(endif) -->
+                                <button><a href="intent://login.html#Intent;scheme=http;action=android.intent.action.VIEW"><img src="img/chrome.svg"></a></button>
+                            </div>
+                            <div class="infoku">
+                                <span>
+                                    <img src="img/wifi.png">
+                                    <h4>Prat.Prot.Net<small>Unlimited Internet</small></h4>
+                                    
+                                </span>
+                                <marquee class="markue" onMouseOver="this.stop()" onMouseOut="this.start()"><p>🚂Halo selamat datang di WIFI-HOTSPOT,🚃 gunakan internet dengan bijak dan jangan Lupa Sholat..😊🚃</p></marquee>
+                            </div>
+                    </div>
+                    <div class="content" id="contentTwo">
+                        <h4>Masukan Kode username dan password</h4>
+                        <form name="login" action="$(link-login-only)" method="post" $(if chap-id) onSubmit="return doLogin()" $(endif)>
+                            <input type="hidden" name="dst" value="$(link-orig)" />
+                            <input type="hidden" name="popup" value="true" />
+
+                            <div class="field">
+                                <!-- <label for="uid">Voucher</label> -->
+                                <input name="username" type="text" value="$(username)" placeholder="Username" required>
+                            </div>
+                            <div class="field">
+                                <!-- <label for="uid">Password</label> -->
+                                <input name="password" type="text" placeholder="Password"  required>
+                            </div>
+                            <input name="password" type="hidden" id="pass">
+
+                            <button type="submit"><img src="img/login.svg">Masuk</button>
+                            <!-- <input type="submit" value="Connect" /> -->
+        
+                        </form>
+                    </div>
+                    <div class="content" id="contentThree">
+                        <h4>Daftar Paket Wifi</h4>
+                        <table id="myTable">
+                            <thead>
+                              <tr>
+                                <th>🔢No</th>
+                                <th>📃Paket</th>
+                                <th>🕛Aktif</th>
+                                <th>💰Harga</th>
+                              </tr>
+                            </thead>
+                            <tbody></tbody>
+                          </table>
+                    </div>
+                    <div class="content" id="contentFour">
+                        <h4>= INFORMASI =</h4>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" style="text-transform: capitalize;">
+                                    <span class="wifi">
+                                        <img src="img/wifi.png">Untuk Pemesanan bisa hubungi nomor di bawah atau datang langsung ke alamat yang tertera di bawah
+                                    </span>
+                                    </td>
+                                </tr>
+                                <tr><td><span><img src="img/wa.svg">WhatsApp</span></td><td><a href="tel:+628XXXX">
+                                    <b>0X957-xxxx-xxxx</b></a></td></tr>
+                                <tr><td><span><img src="img/alamat.png">Alamat</span></td><td>Jln Raya blok Bolink Kec. Losarang - Indramayu</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+  
+                </div>
+            </div>
+           
+        </div>
+    </div>
+    <!-- script -->
+<script>
+ function fillTable() {
+      fetch('paketwifi.json')
+        .then(response => response.json())
+        .then(jsonData => {
+          var table = document.getElementById("myTable");
+          var tbody = table.getElementsByTagName("tbody")[0];
+        
+          for (var i = 0; i < jsonData.length; i++) {
+            var row = tbody.insertRow(i);
+            var cell1 = row.insertCell(0).classList.add('counterCell');
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+  
+            cell2.innerHTML = jsonData[i].Paket;
+            cell3.innerHTML = jsonData[i].Aktif;
+            cell4.innerHTML = jsonData[i].Harga;
+           
+          }
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    }
+  
+    // Panggil fungsi untuk mengisi tabel saat halaman dimuat
+    window.onload = function () {
+      fillTable();
+    };
+
+</script>
+    <script>
+
+function udvalue(){
+    const username = document.getElementById('username').value;
+    const pass = document.getElementById('pass').value=username;      
+}
+
+const handleSubmit = event => {
+  event.preventDefault();
+  document.getElementById("submit1").checked = true;
+  for (i = 1; i <= 3; i++) {
+    document.getElementById("result" + i).style.display = "none";
+  }
+  document.getElementById(
+    "result" + event.target.id.match(/\d/)[0]
+  ).style.display =
+    "block";
+};
+
+document
+  .getElementById("usrfrm1")
+  .addEventListener("submit", handleSubmit, false);
+document
+  .getElementById("usrfrm2")
+  .addEventListener("submit", handleSubmit, false);
+document
+  .getElementById("usrfrm3")
+  .addEventListener("submit", handleSubmit, false);
+
+document.getElementById("gotit").addEventListener("click", () => {
+  document.getElementById("submit1").checked = false;
+});
+
+    </script>
+</body>
+</html>
